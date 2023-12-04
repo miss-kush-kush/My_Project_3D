@@ -7,31 +7,20 @@ using UnityEngine.UI;
 public class ScoringSystem : MonoBehaviour
 {
     public GameObject scoreText;
-    public int theScore;
+    public static int theScore;
 
-    void OnTriggerEnter(Collider other)
+    void Update()
     {
-        theScore += 10;
-
-        if (scoreText != null)
+        TextMeshProUGUI textComponent = scoreText.GetComponent<TextMeshProUGUI>();
+    
+        if (textComponent != null)
         {
-            Text textComponent = scoreText.GetComponent<Text>();
-
-            if (textComponent != null)
-            {
-                textComponent.text = "SCORE: " + theScore;
-            }
-            else
-            {
-                Debug.LogError("Text component not found on scoreText GameObject.");
-            }
+            textComponent.text = "SCORE: " + theScore;
         }
         else
         {
-            Debug.LogError("scoreText GameObject not assigned.");
+            Debug.LogError("TextMeshProUGUI component not found on scoreText GameObject.");
         }
-
-        Destroy(gameObject);
+    
     }
-
 }
